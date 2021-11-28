@@ -24,8 +24,8 @@ class AnswerInlineModel(admin.TabularInline): # have to define the inline and us
 @admin.register(models.Question)
 class QuestionAdmin(admin.ModelAdmin):
     fields = [
-        'question_text',
         'quiz',
+        'question_text',
         ]
     list_display = [
         'question_text', 
