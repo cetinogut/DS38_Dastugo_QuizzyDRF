@@ -72,7 +72,7 @@ class Question(Updated): # instead of models.Model we have our own abstract clas
         default=False, verbose_name=_("Active Status"))
 
     def __str__(self):
-        return self.title
+        return self.question_text
 
 """ The related_name attribute specifies the name of the reverse relation from the Quizzy model back to your model.
 If you don't specify a related_name, Django automatically creates one using the name of your model with the suffix _set, for instance Quizzy.question_set.all().

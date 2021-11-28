@@ -38,7 +38,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("accounts.urls")),
-    #path("quizzy/", include("quizzy.urls")),
+    path("quizzy/", include("dastugo_quizzy_app.urls")),
     #path('swagger(<format>\.json|\.yaml)', schema_view.without_ui(
         #cache_timeout=0), name='schema-json'),
     #path('swagger/', schema_view.with_ui('swagger',

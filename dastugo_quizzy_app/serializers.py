@@ -3,7 +3,6 @@ from .models import Quizzy, Question, Answer
 
 
 class QuizzySerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Quizzy
         fields = [
@@ -11,9 +10,7 @@ class QuizzySerializer(serializers.ModelSerializer):
         ]
 
 class AnswerSerializer(serializers.ModelSerializer):
-
     class Meta:
-        
         model = Answer
         fields = [
             'id',
