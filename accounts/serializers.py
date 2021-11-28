@@ -48,7 +48,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
         return user
     
-    # pass ve pass2 yi object level validasyo ile karşılaştıracağız
+    # pass ve pass2 yi object level validasyon ile karşılaştıracağız
     def validate(self, data):
         if data["password"] != data["password2"]:
             raise serializers.ValidationError(

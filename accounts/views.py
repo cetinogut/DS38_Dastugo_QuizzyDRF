@@ -10,7 +10,7 @@ class RegisterApi(CreateAPIView):
     queryset=User.objects.all()
     serializer_class=RegisterSerializer
     
-    def post(self, request, *args, **kwargs): # normalde register post edildiğinde user bilgisini tekrar döner, burada biz bunu yerine mesage dönmesini istiyoruz . .o yüzde npost methodunu override ettik
+    def post(self, request, *args, **kwargs): # normalde register post edildiğinde user bilgisini tekrar döner, burada biz bunu yerine mesage dönmesini istiyoruz . .o yüzden post methodunu override ettik
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True) #valid değilse hata versin
         ## burada barry hoca ile yaptığımız gibi token üretmemiz lazım

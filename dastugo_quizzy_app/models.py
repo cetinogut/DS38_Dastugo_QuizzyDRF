@@ -12,22 +12,28 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
+    @property
+    def quiz_count(self):
+        return self.quiz_set.count()
+    
 class Quizzy(models.Model):
-
-    class Meta:
-        verbose_name = _("Sınav") # table name what we want to put
-        verbose_name_plural = _("Quizzies") # plural names can be identified for irregularities
-        ordering = ['id']
-
     title = models.CharField(max_length=255, default=_(
-        "New Quiz"), verbose_name=_("Quiz Title"))
+        "New Quiz"), verbose_name=_("Quiz Topic")) # verbose name is the table title in admin panel, but I chnaged it to Quiz Topic which is more understandable 
     category = models.ForeignKey(
         Category, default=1, on_delete=models.DO_NOTHING) # use case 21: I don't want the category to be deleted when I delete a category
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = _("Sınav") # table name what we want to put
+        verbose_name_plural = _("Quizzies") # plural names can be identified for irregularities
+        ordering = ['id']
+        
+    @property
+    def question_count(self):
+        return self.question_set.count()
 
 
 class Updated(models.Model): # this is a nabstract class that we wil luse to pass the updated datetime filed for question and answer. Dont repeat yourself
@@ -41,17 +47,12 @@ class Updated(models.Model): # this is a nabstract class that we wil luse to pas
 
 class Question(Updated): # instead of models.Model we have our own abstract class to inherit.
 
-    class Meta:
-        verbose_name = _("Soru")
-        verbose_name_plural = _("Questions")
-        ordering = ['id']
-
     SCALE = ( # numbers might give better performance during the query..
-        (0, _('Fundamental')), # ready to translate
+        (0, _('Rookie')), # ready to translate
         (1, _('Beginner')),
         (2, _('Intermediate')),
         (3, _('Advanced')),
-        (4, _('Expert'))
+        (4, _('Artist'))
     )
 
     TYPE = (
@@ -73,6 +74,12 @@ class Question(Updated): # instead of models.Model we have our own abstract clas
 
     def __str__(self):
         return self.question_text
+    
+    class Meta:
+        verbose_name = _("Soru")
+        verbose_name_plural = _("Questions")
+        ordering = ['id']
+    
 
 """ The related_name attribute specifies the name of the reverse relation from the Quizzy model back to your model.
 If you don't specify a related_name, Django automatically creates one using the name of your model with the suffix _set, for instance Quizzy.question_set.all().
@@ -87,7 +94,7 @@ class Answer(Updated):
 
     question = models.ForeignKey(
         Question, related_name='answer', on_delete=models.DO_NOTHING)
-    answer_text = models.CharField( #more than on e answer is possible
+    answer_text = models.CharField( 
         max_length=255, verbose_name=_("Answer Text"))
     is_right = models.BooleanField(default=False, verbose_name=_("Doğru Seçenek mi?"))
 

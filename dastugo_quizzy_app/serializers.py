@@ -18,25 +18,20 @@ class AnswerSerializer(serializers.ModelSerializer):
             'is_right',
         ]
 
-class RandomQuestionSerializer(serializers.ModelSerializer):
-
-    answer = AnswerSerializer(many=True, read_only=True)
-
+class RandomQuestionSerializer(serializers.ModelSerializer): #bring one question based on quiz title
+    #answer = serializers.StringRelatedField(many=True) #only answer_text is returned here, no correct answer or other fields.
+    answer = AnswerSerializer(many=True, read_only=True) # realtion exists so we ca nreturn all fields to the front end
     class Meta:
-    
         model = Question
         fields = [
-            'title','answer',
+            'question_text','answer', # get the answers to this question based on the foreign key
         ]
 
 
-class QuestionSerializer(serializers.ModelSerializer):
-
+class QuestionSerializer(serializers.ModelSerializer): # bring all questions based on quiz title (topic)
     answer = AnswerSerializer(many=True, read_only=True)
-    quiz = QuizzySerializer(read_only=True)
-
+    quiz = QuizzySerializer(read_only=True) # get the quiz topic
     class Meta:
-    
         model = Question
         fields = [
             'quiz','question_text','answer',
