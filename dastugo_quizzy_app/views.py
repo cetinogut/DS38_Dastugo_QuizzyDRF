@@ -35,7 +35,7 @@ class CategoryQuizzes(generics.ListAPIView):
     #permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        queryset = Quiz.objects.all()
+        queryset = Quizzy.objects.all()
         category = self.kwargs["category"] 
         queryset = queryset.filter(category__name=category)
         return queryset

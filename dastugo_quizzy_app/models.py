@@ -13,8 +13,8 @@ class Category(models.Model):
         return self.name
 
     @property
-    def quiz_count(self):
-        return self.quiz_set.count()
+    def quizzy_count(self):
+        return self.quizzy_set.count()
     
 class Quizzy(models.Model):
     title = models.CharField(max_length=255, default=_(
@@ -33,7 +33,8 @@ class Quizzy(models.Model):
         
     @property
     def question_count(self):
-        return self.question_set.count()
+        #return self.question_set.count() # I used related_name in Question model as question. for this reason question_set is not defined and does not work correctly. The solution is the line below.
+        return self.question.count()
 
 
 class Updated(models.Model): # this is a nabstract class that we wil luse to pass the updated datetime filed for question and answer. Dont repeat yourself
