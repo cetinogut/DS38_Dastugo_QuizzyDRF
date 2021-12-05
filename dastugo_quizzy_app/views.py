@@ -11,7 +11,7 @@ class Quiz(generics.ListAPIView): # list all quizzes
     serializer_class = QuizzySerializer
     queryset = Quizzy.objects.all()
 
-class RandomQuestion(APIView): # APIView gives us more control
+class RandomQuestion(APIView): # APIView gives us more control, this brings a random question from a given quiz topic. i.e. title
     def get(self, request, format=None, **kwargs):
         rand_question = Question.objects.filter(quiz__title=kwargs['topic']).order_by('?')[:1] # select a random question in a simple way based on title
         serializer = RandomQuestionSerializer(rand_question, many=True) # we may want to get more than one, multiple questions
@@ -24,13 +24,20 @@ class QuizQuestion(APIView):
         return Response(serializer.data)
 
 class CategoryList(generics.ListAPIView):
+    """
+    View to list all categories in the system.
+
+    * Requires token authentication and session authentication.
+    * Only admin users are able to access this view.
+    """
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+    #authentication_classes = [TokenAuthentication, SessionAuthentication]
     #permission_classes = [IsAuthenticated]
-    # authentication_classes = [TokenAuthentication, SessionAuthentication]
+    
 
 
-class CategoryQuizzes(generics.ListAPIView):
+class CategoryQuizzes(generics.ListAPIView): #to view all quizzes related to a category
     serializer_class = CategoryQuizzesSerializer
     #permission_classes = [IsAuthenticated]
 

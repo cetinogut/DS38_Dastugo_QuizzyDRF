@@ -10,13 +10,14 @@ class QuizzyInlineModel(admin.TabularInline): # have to define the inline and us
         ]
     readonly_fields = ('question_count',)
     
-@admin.register(models.Category)
+#@admin.register(models.Category)
+admin.site.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [
         'name',
         'quizzy_count',
         ]
-    fields = ['name', ('quizzy_count')] # quizz_count is a added property. To show this one in admin panel also add the line below for read only field
+    fields = ['name', ('quizzy_count')] # quiz_count is a added property. To show this one in admin panel also add the line below for read only field
     readonly_fields = ('quizzy_count',)
     inlines = [
         QuizzyInlineModel,

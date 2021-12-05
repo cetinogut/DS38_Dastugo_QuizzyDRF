@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _ # potential items for transşlation gets _ in front
+from django.utils.translation import gettext_lazy as _ # potential items for translation gets _ in front
 
 
 class Category(models.Model):
@@ -36,15 +36,13 @@ class Quizzy(models.Model):
         #return self.question_set.count() # I used related_name in Question model as question. for this reason question_set is not defined and does not work correctly. The solution is the line below.
         return self.question.count()
 
-
-class Updated(models.Model): # this is a nabstract class that we wil luse to pass the updated datetime filed for question and answer. Dont repeat yourself
+class Updated(models.Model): # this is an abstract class that we wil luse to pass the updated datetime filed for question and answer. Dont repeat yourself
 
     date_updated = models.DateTimeField(
         verbose_name=_("Last Updated"), auto_now=True)
 
     class Meta:
         abstract = True
-
 
 class Question(Updated): # instead of models.Model we have our own abstract class to inherit.
 
