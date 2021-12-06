@@ -43,6 +43,7 @@ class QuestionAdmin(admin.ModelAdmin):
     fields = [
         'quiz',
         'question_text',
+        'explanation_of_answer',
         ]
     list_display = [
         'question_text', 

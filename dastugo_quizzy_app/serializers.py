@@ -25,6 +25,7 @@ class QuizzySerializer(serializers.ModelSerializer):
         fields = [
             'title',
             'question_count',
+            
         ]
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -42,7 +43,7 @@ class RandomQuestionSerializer(serializers.ModelSerializer): #bring one question
     class Meta:
         model = Question
         fields = [
-            'question_text','answer', # get the answers to this question based on the foreign key
+            'question_text','answer', 'explanation_of_answer', # get the answers to this question based on the foreign key
         ]
 
 
@@ -52,5 +53,5 @@ class QuestionSerializer(serializers.ModelSerializer): # bring all questions bas
     class Meta:
         model = Question
         fields = [
-            'quiz','question_text','answer',
+            'quiz','question_text','answer','explanation_of_answer',
         ]

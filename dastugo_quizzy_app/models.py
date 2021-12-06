@@ -64,6 +64,7 @@ class Question(Updated): # instead of models.Model we have our own abstract clas
     technique = models.IntegerField(
         choices=TYPE, default=0, verbose_name=_("Type of Question"))
     question_text = models.CharField(max_length=255, verbose_name=_("Question"))
+    explanation_of_answer = models.CharField(max_length=255, verbose_name=_("Explanation"), null=True, blank=True)
     difficulty = models.IntegerField(
         choices=SCALE, default=0, verbose_name=_("Difficulty"))
     date_created = models.DateTimeField(
