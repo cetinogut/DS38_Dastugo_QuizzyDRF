@@ -13,7 +13,7 @@ class Category(models.Model):
         return self.name
 
     @property
-    def quizzy_count(self):
+    def quiz_count(self):
         return self.quizzy_set.count()
     
 class Quizzy(models.Model):

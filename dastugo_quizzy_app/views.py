@@ -36,7 +36,6 @@ class CategoryList(generics.ListAPIView):
     #permission_classes = [IsAuthenticated]
     
 
-
 class CategoryQuizzes(generics.ListAPIView): #to view all quizzes related to a category
     serializer_class = CategoryQuizzesSerializer
     #permission_classes = [IsAuthenticated]

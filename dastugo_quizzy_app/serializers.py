@@ -24,6 +24,7 @@ class QuizzySerializer(serializers.ModelSerializer):
         model = Quizzy
         fields = [
             'title',
+            'question_count',
         ]
 
 class AnswerSerializer(serializers.ModelSerializer):

@@ -4,7 +4,8 @@ from .views import Quiz , RandomQuestion, QuizQuestion, CategoryQuizzes, Categor
 app_name='dastugo_quizzy_app'
 
 urlpatterns = [
-    path('', CategoryList.as_view(), name="category-list"),
+    #path('', CategoryList.as_view(), name="category-list"),
+    path('', Quiz.as_view(), name='quiz-list'),
     path('quizzes/', Quiz.as_view(), name='quiz-list'),
     path("<category>/", CategoryQuizzes.as_view(), name="category-quizzes"),
     #path("<int:pk>/", CategoryQuizzes.as_view(), name="category-quizzes"),

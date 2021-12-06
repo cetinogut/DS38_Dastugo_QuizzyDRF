@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken', # in order to use To use the TokenAuthentication
     'dj_rest_auth', # pip install dj-rest-auth, https://dj-rest-auth.readthedocs.io/en/latest/installation.html, dj_rest_auth has basic auth functionality like login, logout, password reset and password change
                     #alternative package: django-rest-authtoken, pip install django-rest-authtoken, https://pypi.org/project/django-rest-authtoken/
-    
+    'corsheaders',  # pip install django-cors-headers
     # swagger
     #'drf_yasg',
 
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware", # added for cors
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -162,3 +163,16 @@ REST_FRAMEWORK = { # basic auth.
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+#CORS_ORIGIN_WHITELIST = [
+ #    'http://localhost:3000' # this is the react front end url and port
+#]
+
+CORS_ALLOWED_ORIGINS = [ # Previously this setting was called CORS_ORIGIN_WHITELIST, which still works as an alias, with the new name taking precedence.
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8080",
+    "http://127.0.0.1:8000",
+]
+
+CORS_ALLOW_ALL_ORIGINS: True # Setting this to True can be dangerous, as it allows any website to make cross-origin requests to yours.
