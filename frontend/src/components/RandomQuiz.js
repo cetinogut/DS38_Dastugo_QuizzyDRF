@@ -38,9 +38,12 @@ export const RandomQuiz = () => {
   const { topic } = useParams();
   const API_URL = "http://127.0.0.1:8000/quizzy/random/" + topic;
   const [dataState] = ConnectApi(API_URL);
-  console.log(dataState);
+  //console.log(dataState);
   const answerChoices = dataState.data.flatMap((q) => q.answer);
   const answerChoicesCount = answerChoices.length;
+  const explanation = dataState.data.map((q) => q.explanation_of_answer);
+  //console.log("exp text : " + explanation[0])
+  //console.log("exp : " + explanation.length)
   const [answer, setAnswer] = useState({});
   const [answerCheck, setAnswerCheck] = useState();
 
@@ -99,6 +102,10 @@ export const RandomQuiz = () => {
       return (
         <Alert severity="success">
           <AlertTitle>Correct Answer</AlertTitle>
+          {explanation[0] ?
+          <AlertTitle>Explanation {explanation} </AlertTitle>
+        :
+        <> </> }
           Well done you got it right —{" "}
           <Link href="#" variant="body2" onClick={refreshPage}>
             {"Next Question"}
@@ -117,12 +124,17 @@ export const RandomQuiz = () => {
     }
   }
 
+
+
   return (
     <React.Fragment>
       <Header />
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
-          {dataState.data.map(({ question_text, answer }, i) => (
+          <Typography component="h1" variant="h4" align="center" gutterBottom color="error" >
+                {topic}
+          </Typography>
+          {dataState.data.map(({ question_text, answer, explanation_of_answer }, i) => (
             <div key={i}>
               <Typography component="h1" variant="h5">
                 {question_text}
